@@ -39,6 +39,7 @@ DROP TABLE IF EXISTS `datasource_config`;
 CREATE TABLE `datasource_config` (
   `dc_id` int(11) NOT NULL AUTO_INCREMENT,
   `driver_class` varchar(50) DEFAULT NULL COMMENT '数据库驱动',
+  `name` varchar(50) DEFAULT NULL,
   `db_name` varchar(50) DEFAULT NULL,
   `ip` varchar(50) DEFAULT NULL,
   `port` int(11) DEFAULT NULL,
