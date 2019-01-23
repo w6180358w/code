@@ -31,10 +31,10 @@ public class DataSourceConfigController extends
 	@RequestMapping("/listDataSource.do")
 	public @ResponseBody
 	GridResult listDataSource(DatasourceConfigSch searchEntity) {
-		BackUser user = AutoCodeContext.getInstance().getUser();
+		//BackUser user = AutoCodeContext.getInstance().getUser();
 		ExpressionQuery query = this.buildExpressionQuery(searchEntity);
 		
-		query.add(new ValueExpression("back_user", user.getUsername()));
+		//query.add(new ValueExpression("back_user", user.getUsername()));
 		
 		return this.query(query);
 	}

@@ -51,7 +51,12 @@ public class MySqlColumnSelector extends ColumnSelector {
 		
 		columnDefinition.setComment((String)rowMap.get("COMMENT"));
 		
-		columnDefinition.setSize(buildSize(rowMap.get("TYPE")+""));
+		try {
+			columnDefinition.setSize(buildSize(rowMap.get("TYPE")+""));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		columnDefinition.setNotNull("NO".equals(rowMap.get("NULL")));
 		
@@ -76,7 +81,11 @@ public class MySqlColumnSelector extends ColumnSelector {
 			int start = type.indexOf("(");
 			int end = type.indexOf(")");
 			if (start > 0) {
-				return Long.parseLong(type.substring(start+1, end));
+				String sizeStr = type.substring(start+1, end);
+				if(sizeStr.indexOf(",")>0) {
+					sizeStr = sizeStr.split(",")[0];
+				}
+				return Long.parseLong(sizeStr);
 			}
 			return 0l;
 		}

@@ -23,6 +23,7 @@ public class DataBaseConfig {
 	private String username;
 	private String password;
 	private String ignore;
+	private String fix;
 	
 	public String getJdbcUrl() {
 		String url = jdbcUrlMap.get(driverClass);
@@ -91,6 +92,14 @@ public class DataBaseConfig {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getFix() {
+		return fix;
+	}
+
+	public void setFix(String fix) {
+		this.fix = fix;
 	}
 
 }

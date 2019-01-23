@@ -52,6 +52,10 @@
                     <td id="txt-password"></td>
                 </tr>
                 <tr>
+                    <th>忽略字符串(fix)：</th>
+                    <td id="txt-fix"></td>
+                </tr>
+                <tr>
                     <th>忽略字段(ignore)：</th>
                     <td id="txt-ignore"></td>
                 </tr>
@@ -93,6 +97,7 @@ grid = new FDGrid({
 		,{text:'账号/密码',style:{width:'80px'},name:'_account',render:function(row){
 			return row.username + "/" + row.password;
 		}}
+		,{text:'忽略字符串',style:{width:'80px'},name:'fix'}
 		,{text:'忽略字段',style:{width:'80px'},name:'ignore'}
 	]
 	,actionColumnConfig:{text:'操作',style:{'textAlign':'center',width:'180px'}}
@@ -165,6 +170,7 @@ formPanel = new FDFormPanel({
 		     ,{rule:{maxLength:20},successClass:'green',errorClass:'require-red',errorMsg:'用户名长度不能大于20'}
 		     ]
 		})
+	    ,new FDTextBox({domId:'txt-fix',name:'fix',msgId:'formMsg',width:200})
 		,new FDTextBox({domId:'txt-password',name:'password',msgId:'formMsg',width:200
 			,validates:[
 				{rule:{notNull:true},successClass:'green',errorClass:'require-red',errorMsg:'密码不能为空'}

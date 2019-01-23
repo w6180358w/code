@@ -46,6 +46,7 @@ CREATE TABLE `datasource_config` (
   `username` varchar(50) DEFAULT NULL,
   `password` varchar(50) DEFAULT NULL,
   `back_user` varchar(20) DEFAULT NULL,
+  `fix` varchar(100) DEFAULT NULL,
   `ignore` TEXT,
   PRIMARY KEY (`dc_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
