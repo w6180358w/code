@@ -12,9 +12,7 @@ public class FieldUtil {
 	 */
 	public static String underlineFilter(String field) {
 		if (StringUtils.hasText(field)) {
-			if(field.indexOf("_") > -1) {
-				field = field.toLowerCase();
-			}
+			field = field.toLowerCase();
 			StringBuilder sb = new StringBuilder(field);
 			while (sb.indexOf("_") > -1) {
 				int index = sb.indexOf("_");

@@ -52,7 +52,7 @@ public class GeneratorService {
             for (int tcId : generatorParam.getTcIds()) {
 
                 TemplateConfig template = templateConfigService.get(tcId);
-                sqlContext.setPackageName(sqlContext.getPackageName()+"."+template.getSavePath());
+                sqlContext.setPackageName(generatorParam.getPackageName()+"."+template.getSavePath());
                 String fileName = doGenerator(sqlContext,template.getFileName());
                 String content = doGenerator(sqlContext, template.getContent());
 
@@ -94,7 +94,7 @@ public class GeneratorService {
             setPackageName(sqlContext, generatorParam.getPackageName());
             for (int tcId : generatorParam.getTcIds()) {
                 TemplateConfig template = templateConfigService.get(tcId);
-                sqlContext.setPackageName(sqlContext.getPackageName()+"."+template.getSavePath());
+                sqlContext.setPackageName(generatorParam.getPackageName()+"."+template.getSavePath());
                 String content = doGenerator(sqlContext, template.getContent());
                 String fileName = doGenerator(sqlContext,template.getFileName());
                 String savePath = doGenerator(sqlContext,template.getSavePath());

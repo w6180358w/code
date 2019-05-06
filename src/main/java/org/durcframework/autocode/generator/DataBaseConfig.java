@@ -12,6 +12,7 @@ public class DataBaseConfig {
 		// net.sourceforge.jtds.jdbc.Driver
 		// com.microsoft.sqlserver.jdbc.SQLServerDriver
 		jdbcUrlMap.put("com.mysql.jdbc.Driver", "jdbc:mysql://%s:%s/%s?useUnicode=true&characterEncoding=UTF-8");
+		jdbcUrlMap.put("com.mysql.cj.jdbc.Driver", "jdbc:mysql://%s:%s/%s?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC");
 		jdbcUrlMap.put("net.sourceforge.jtds.jdbc.Driver", "jdbc:jtds:sqlserver://%s:%s;databaseName=%s");
 	}
 	

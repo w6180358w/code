@@ -76,8 +76,9 @@ var updateUrl = ctx + 'updateDataSource.do'; // 修改
 var delUrl = ctx + 'delDataSource.do'; // 删除
 
 var DB_ITEMS =[
-   	{text:'MySql',value:'com.mysql.jdbc.Driver'}
-	,{text:'SqlServer',value:'net.sourceforge.jtds.jdbc.Driver'}
+   	{text:'MySql',value:'com.mysql.jdbc.Driver'},
+   	{text:'MySql 8',value:'com.mysql.cj.jdbc.Driver'},
+   	{text:'SqlServer',value:'net.sourceforge.jtds.jdbc.Driver'}
 ];
 
 var portMap = {
