@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.durcframework</groupId>
@@ -10,7 +11,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 	</properties>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>net.oschina.durcframework</groupId>
@@ -38,9 +39,9 @@
 			<version>1.7</version>
 		</dependency>
 		<dependency>
-		  <groupId>org.sitemesh</groupId>
-		  <artifactId>sitemesh</artifactId>
-		  <version>3.0.0</version>
+			<groupId>org.sitemesh</groupId>
+			<artifactId>sitemesh</artifactId>
+			<version>3.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -71,7 +72,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc</artifactId>
@@ -104,37 +105,38 @@
 				</configuration>
 			</plugin>
 			<!-- mvn jetty:run -->
-			<plugin> 
-			    <groupId>org.mortbay.jetty</groupId> 
-			    <artifactId>maven-jetty-plugin</artifactId>
-			    <version>6.1.26</version>
-			    <configuration>    
-			        <contextPath>/autoCode</contextPath>    
-			        <connectors>    
-			            <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-			                <port>8888</port>    
-			            </connector>    
-			        </connectors>    
-			        <reload>automatic</reload>  
-			        <scanIntervalSeconds>3</scanIntervalSeconds>
-			        <systemProperties>
-			            <systemProperty>
-				        <name>org.mortbay.util.URI.charset</name>
-				        <value>UTF-8</value>
-				    </systemProperty>
-				 </systemProperties>
-			     </configuration> 
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<version>6.1.26</version>
+				<configuration>
+					<contextPath>/autoCode</contextPath>
+					<connectors>
+						<connector
+							implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+							<port>8888</port>
+						</connector>
+					</connectors>
+					<reload>automatic</reload>
+					<scanIntervalSeconds>3</scanIntervalSeconds>
+					<systemProperties>
+						<systemProperty>
+							<name>org.mortbay.util.URI.charset</name>
+							<value>UTF-8</value>
+						</systemProperty>
+					</systemProperties>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.8</source>
+					<target>1.8</target>
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
@@ -143,7 +145,7 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<!-- YUI Compressor Maven压缩插件 -->
 				<groupId>net.alchim31.maven</groupId>
@@ -186,13 +188,9 @@
 							<!-- 最终合并的输出文件 -->
 							<output>src/main/webapp/easyui/res/js/common.js</output>
 							<!-- 把以下js文件合并成一个js文件，是按顺序合并的 -->
-							
-							<!-- 
-							运行命令mvn yuicompressor:compress
-							会把下面几个js文件压缩到src/main/webapp/js/common.js中
-							并生成一个common.min.js
-							不会影响到其它js,css
-							 -->
+
+							<!-- 运行命令mvn yuicompressor:compress 会把下面几个js文件压缩到src/main/webapp/js/common.js中 
+								并生成一个common.min.js 不会影响到其它js,css -->
 							<includes>
 								<include>Action.js</include>
 								<include>Crud.js</include>
@@ -207,7 +205,21 @@
 					</aggregations>
 				</configuration>
 			</plugin>
-			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<forceCreation>true</forceCreation>
+					<archive>
+						<manifest>
+							<mainClass>com.gmobile.JettyServer</mainClass>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 

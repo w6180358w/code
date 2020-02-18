@@ -4,41 +4,40 @@ import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.durcframework.autocode.entity.DataSourceConfig;
 
 public class DBConnect {
-	public static Connection getConnection(DataSourceConfig config) throws ClassNotFoundException, SQLException
-			 {
+	private static Map<String,Driver> driMap = new HashMap<>();
+	public static Connection getConnection(DataSourceConfig config) throws ClassNotFoundException, SQLException{
+		//注册要连接的却动
+		Class.forName(config.getDriverClass());
 		//清空其他的驱动
 		String[] drivers = new String[]{"jdbc:mysql:","jdbc:jtds:sqlserver:","jdbc:oracle:thin:"};
-		Map<String,Driver> driMap = new HashMap<>();
 		for (String dri : drivers) {
 			try {
 				Driver d = DriverManager.getDriver(dri);
 				DriverManager.deregisterDriver(d);
-				driMap.put(dri, d);
-				System.out.println("注销"+dri);
+				if(driMap.get(dri)==null) {
+					driMap.put(dri, d);
+				}
 			} catch (Exception e) {
 			}
 		}
-		
+		//重新注册要连接的驱动
 		for (String dri : drivers) {
 			if(config.getJdbcUrl().indexOf(dri)>-1) {
 				DriverManager.registerDriver(driMap.get(dri));
-				System.out.println("注册"+dri);
 				break;
 			}
 		}
 		
-		
-		Enumeration<Driver> dris = DriverManager.getDrivers();
+		/*Enumeration<Driver> dris = DriverManager.getDrivers();
 		while(dris.hasMoreElements()) {
 			System.out.println(dris.nextElement().getClass().getName());
-		}
+		}*/
 		return DriverManager.getConnection(config.getJdbcUrl(),
 				config.getUsername(), config.getPassword());
 	}
