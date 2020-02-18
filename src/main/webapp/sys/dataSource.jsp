@@ -52,7 +52,7 @@
                     <td id="txt-password"></td>
                 </tr>
                 <tr>
-                    <th>忽略字符串(fix)：</th>
+                    <th>表名忽略字符串(fix)：</th>
                     <td id="txt-fix"></td>
                 </tr>
                 <tr>
@@ -78,12 +78,14 @@ var delUrl = ctx + 'delDataSource.do'; // 删除
 var DB_ITEMS =[
    	{text:'MySql',value:'com.mysql.jdbc.Driver'},
    	{text:'MySql 8',value:'com.mysql.cj.jdbc.Driver'},
-   	{text:'SqlServer',value:'net.sourceforge.jtds.jdbc.Driver'}
+   	{text:'SqlServer',value:'net.sourceforge.jtds.jdbc.Driver'},
+   	{text:'Oracle',value:'oracle.jdbc.xa.client.OracleXADataSource'}
 ];
 
 var portMap = {
-	'com.mysql.jdbc.Driver':3306
-	,'net.sourceforge.jtds.jdbc.Driver':1433 
+	'com.mysql.jdbc.Driver':3306,
+	'net.sourceforge.jtds.jdbc.Driver':1433,
+	'oracle.jdbc.xa.client.OracleXADataSource':1521
 }
 
 grid = new FDGrid({
@@ -98,7 +100,7 @@ grid = new FDGrid({
 		,{text:'账号/密码',style:{width:'80px'},name:'_account',render:function(row){
 			return row.username + "/" + row.password;
 		}}
-		,{text:'忽略字符串',style:{width:'80px'},name:'fix'}
+		,{text:'表名忽略字符串',style:{width:'80px'},name:'fix'}
 		,{text:'忽略字段',style:{width:'80px'},name:'ignore'}
 	]
 	,actionColumnConfig:{text:'操作',style:{'textAlign':'center',width:'180px'}}

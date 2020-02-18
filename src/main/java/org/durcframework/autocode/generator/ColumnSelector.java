@@ -44,9 +44,13 @@ public abstract class ColumnSelector {
 			}
 		}
 					
-		return columnDefinitionList;
+		return afterColumnDefinitions(tableName, columnDefinitionList);
 	}
 
+	protected List<ColumnDefinition> afterColumnDefinitions(String tableName,List<ColumnDefinition> columnDefinitionList){
+		return columnDefinitionList;
+	}
+	
 	public DataBaseConfig getDataBaseConfig() {
 		return dataBaseConfig;
 	}

@@ -40,6 +40,13 @@ public class SqlTypeUtil {
 		javaTypeMap.put("uniqueidentifier", "String");
 		javaTypeMap.put("varbinary", "byte[]");
 		javaTypeMap.put("varchar", "String");
+		//oracle
+		javaTypeMap.put("varchar2", "String");
+		javaTypeMap.put("number", "long");
+		javaTypeMap.put("raw", "byte[]");
+		javaTypeMap.put("longraw", "byte[]");
+		javaTypeMap.put("blob", "Blob");
+		javaTypeMap.put("clob", "CLOB");
 		
 		
 		javaBoxTypeMap.put("bigint", "Long");
@@ -71,6 +78,14 @@ public class SqlTypeUtil {
 		javaBoxTypeMap.put("varbinary", "Byte[]");
 		javaBoxTypeMap.put("varchar", "String");
 		
+		//oracle
+		javaBoxTypeMap.put("varchar2", "String");
+		javaBoxTypeMap.put("number", "Long");
+		javaBoxTypeMap.put("raw", "byte[]");
+		javaBoxTypeMap.put("longraw", "byte[]");
+		javaBoxTypeMap.put("blob", "Blob");
+		javaBoxTypeMap.put("clob", "CLOB");
+				
 		
 		mybatisTypeMap.put("bigint", "LONG");
 		mybatisTypeMap.put("binary", "BLOB");
@@ -100,6 +115,14 @@ public class SqlTypeUtil {
 		mybatisTypeMap.put("uniqueidentifier", "VARCHAR");
 		mybatisTypeMap.put("varbinary", "BLOB");
 		mybatisTypeMap.put("varchar", "VARCHAR");
+		
+		//oracle
+		mybatisTypeMap.put("varchar2", "VARCHAR2");
+		mybatisTypeMap.put("number", "NUMBER");
+		mybatisTypeMap.put("raw", "BLOB");
+		mybatisTypeMap.put("longraw", "BLOB");
+		mybatisTypeMap.put("blob", "BLOB");
+		mybatisTypeMap.put("clob", "CLOB");
 	}
 	
 	/**

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.durcframework.autocode.generator.mysql.MySqlService;
+import org.durcframework.autocode.generator.oracle.OracleService;
 import org.durcframework.autocode.generator.sqlserver.SqlServerService;
 import org.durcframework.core.DurcException;
 
@@ -41,6 +42,9 @@ public class SQLServiceFactory {
 		}
 		if (driverClass.contains("sqlserver")) {
 			return new SqlServerService();
+		}
+		if (driverClass.contains("oracle")) {
+			return new OracleService();
 		}
 		// ... 添加其他数据库
 
