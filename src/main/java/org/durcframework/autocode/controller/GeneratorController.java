@@ -1,6 +1,11 @@
 package org.durcframework.autocode.controller;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -60,13 +65,40 @@ public class GeneratorController extends BaseController{
 				dataSourceConfigService.get(generatorParam.getDcId());
 
 		String zipPath = generatorService.generateZip(generatorParam, dataSourceConfig, webRootPath);
-		
+		OutputStream outStream = null;
+		BufferedInputStream fis = null;
 		try {
-			String downloadUrl = request.getContextPath() + zipPath.substring(webRootPath.length()).replace("\\", "/");
-			response.sendRedirect(downloadUrl);
-		} catch (IOException e) {
-			e.printStackTrace();
+			response.setCharacterEncoding("UTF-8");
+			File file = new File(zipPath);
+			fis = new BufferedInputStream(new FileInputStream(file.getPath()));
+			byte[] buffer = new byte[fis.available()];
+			fis.read(buffer);
+			
+			response.reset();
+			outStream = new BufferedOutputStream(response.getOutputStream());
+			response.setContentType("application/octet-stream");
+			response.setHeader("Content-Disposition", "attachment;filename=" + System.currentTimeMillis()+".zip");
+			outStream.write(buffer);
+			outStream.flush();
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		} finally {
+			if(outStream!=null) {
+				try {
+					outStream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if(fis!=null) {
+				try {
+					fis.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
+		
 	}
 	
 	@RequestMapping("/downloadCode.do")
