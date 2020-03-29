@@ -65,6 +65,7 @@ CREATE TABLE `template_config` (
   `file_name` varchar(50) DEFAULT NULL,
   `content` text,
   `back_user` varchar(20) DEFAULT NULL,
+  `project` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`tc_id`),
   KEY `f_backuser` (`back_user`)
 ) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COMMENT='模板表';
