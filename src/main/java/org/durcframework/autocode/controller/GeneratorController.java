@@ -41,17 +41,21 @@ public class GeneratorController extends BaseController{
 	public @ResponseBody
 	Object generatFile(GeneratorParam generatorParam,HttpServletRequest request) {
 		
-		request.getSession().setAttribute("generatorParam", generatorParam);
-		
-		DataSourceConfig dataSourceConfig = 
-				dataSourceConfigService.get(generatorParam.getDcId());
-		
-		if(StringUtils.isEmpty(dataSourceConfig.getDbName())) {
-			return this.error("请前往[数据源配置]填写数据库名(dbName)");
-		}
+		List<CodeFile> resultList = null;
+		try {
+			request.getSession().setAttribute("generatorParam", generatorParam);
+			
+			DataSourceConfig dataSourceConfig = 
+					dataSourceConfigService.get(generatorParam.getDcId());
+			
+			if(StringUtils.isEmpty(dataSourceConfig.getDbName())) {
+				return this.error("请前往[数据源配置]填写数据库名(dbName)");
+			}
 
-		List<CodeFile> resultList = 
-				generatorService.generate(generatorParam,dataSourceConfig);
+			resultList = generatorService.generate(generatorParam,dataSourceConfig);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		return resultList;
 	}

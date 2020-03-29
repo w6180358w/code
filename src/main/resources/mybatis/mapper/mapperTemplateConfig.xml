@@ -9,6 +9,7 @@
 		<result column="file_name" property="fileName" jdbcType="VARCHAR" />
 		<result column="content" property="content" jdbcType="VARCHAR" />
 		<result column="back_user" property="backUser" jdbcType="VARCHAR" />
+		<result column="project" property="project" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<select id="find" parameterType="org.durcframework.core.expression.ExpressionQuery"
@@ -42,14 +43,16 @@
              `file_name`,
              `content`,
              `back_user`,
-             `suffix`)
+             `suffix`,
+             `project`)
 		VALUES (
         #{name,jdbcType=VARCHAR},
         #{savePath,jdbcType=VARCHAR},
         #{fileName,jdbcType=VARCHAR},
         #{content,jdbcType=VARCHAR},
         #{backUser,jdbcType=VARCHAR},
-        #{suffix,jdbcType=VARCHAR}
+        #{suffix,jdbcType=VARCHAR},
+        #{project,jdbcType=VARCHAR}
         )
 	</insert>
 	
@@ -61,7 +64,8 @@
 		  `file_name` =  #{fileName,jdbcType=VARCHAR},
 		  `content` = #{content,jdbcType=VARCHAR},
 		  `back_user` = #{backUser,jdbcType=VARCHAR},
-		  `suffix` = #{suffix,jdbcType=VARCHAR}
+		  `suffix` = #{suffix,jdbcType=VARCHAR},
+		  `project` = #{project,jdbcType=VARCHAR}
 		WHERE `tc_id` = #{tcId,jdbcType=INTEGER}
 	</update>
 	

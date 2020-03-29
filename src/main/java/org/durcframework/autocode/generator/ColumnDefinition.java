@@ -70,7 +70,11 @@ public class ColumnDefinition  {
 	public String getColumnName() {
 		return columnName;
 	}
-
+	//列名大写
+	public String getColumnNameUp() {
+		return columnName.toUpperCase();
+	}
+	
 	public void setColumnName(String columnName) {
 		this.columnName = columnName;
 	}

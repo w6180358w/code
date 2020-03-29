@@ -56,6 +56,10 @@
                     <td colspan="3"><a href="#" class="link" onclick="VelocityHelper.show(); return false;">查看Velocity参数</a></td>
                 </tr>
                 <tr>
+	                <th width="100"><i class="require-red">*</i>项目名：</th>
+	                <td id="txt-project"></td>
+	            </tr>
+                <tr>
                 	<th><i class="require-red">*</i>文件名：</th>
                     <td id="txt-fileName" colspan="2"></td>
                     <th width="80">保存路径：</th>
@@ -204,6 +208,12 @@ formPanel = new FDFormPanel({
 	}
 	,controls:[
 	    new FDHidden({name:'tcId',defaultValue:0})
+	    ,new FDTextBox({domId:'txt-project',name:'project',msgId:'formMsg'
+			,validates:[
+		     {rule:{notNull:true},successClass:'green',errorClass:'require-red',errorMsg:'项目名不能为空'}
+		     ,{rule:{maxLength:200},successClass:'green',errorClass:'require-red',errorMsg:'项目名长度不能大于200'}
+		     ]
+		})
 		,new FDTextBox({domId:'txt-name',name:'name',msgId:'formMsg'
 			,validates:[
 		     {rule:{notNull:true},successClass:'green',errorClass:'require-red',errorMsg:'模版名不能为空'}

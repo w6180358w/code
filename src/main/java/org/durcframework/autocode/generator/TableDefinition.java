@@ -49,6 +49,10 @@ public class TableDefinition {
 	public void setTableName(String tableName) {
 		this.tableName = tableName;
 	}
+	// 表名大写
+	public String getTableNameUp() {
+		return tableName.toUpperCase();
+	}
 
 	public String getComment() {
 		return comment;

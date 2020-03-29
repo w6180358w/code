@@ -1,6 +1,10 @@
 package org.durcframework.autocode.service;
 
 import java.io.File;
+import java.io.ObjectStreamClass;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -52,7 +56,8 @@ public class GeneratorService {
             for (int tcId : generatorParam.getTcIds()) {
 
                 TemplateConfig template = templateConfigService.get(tcId);
-                sqlContext.setPackageName(generatorParam.getPackageName()+"."+template.getSavePath());
+                sqlContext.setPackageName(generatorParam.getPackageName());
+                sqlContext.setProject(template.getProject());
                 String fileName = doGenerator(sqlContext,template.getFileName());
                 String content = doGenerator(sqlContext, template.getContent());
 
@@ -94,7 +99,8 @@ public class GeneratorService {
             setPackageName(sqlContext, generatorParam.getPackageName());
             for (int tcId : generatorParam.getTcIds()) {
                 TemplateConfig template = templateConfigService.get(tcId);
-                sqlContext.setPackageName(generatorParam.getPackageName()+"."+template.getSavePath());
+                sqlContext.setPackageName(generatorParam.getPackageName());
+                sqlContext.setProject(template.getProject());
                 String content = doGenerator(sqlContext, template.getContent());
                 String fileName = doGenerator(sqlContext,template.getFileName());
                 String savePath = doGenerator(sqlContext,template.getSavePath());
@@ -138,10 +144,11 @@ public class GeneratorService {
     	String classFolder = projectFolder + "/class";
     	String resourcesFolder = projectFolder + "/resources";
     	
-         setPackageName(sqlContext, clientParam.getPackageName());
+        setPackageName(sqlContext, clientParam.getPackageName());
          
-         for (int tcId : classTcIds) {
+        for (int tcId : classTcIds) {
              TemplateConfig template = templateConfigService.get(tcId);
+             sqlContext.setProject(template.getProject());
              String content = doGenerator(sqlContext, template.getContent());
              String fileName = doGenerator(sqlContext,template.getFileName());
              String savePath = doGenerator(sqlContext,template.getSavePath());
@@ -158,10 +165,11 @@ public class GeneratorService {
              		savePath + File.separator + 
              		fileName;
              FileUtil.write(content,filePathName,clientParam.getCharset());
-         }
+        }
          
-         for (int tcId : resourcesTcIds) {
+        for (int tcId : resourcesTcIds) {
              TemplateConfig template = templateConfigService.get(tcId);
+             sqlContext.setProject(template.getProject());
              String content = doGenerator(sqlContext, template.getContent());
              String fileName = doGenerator(sqlContext,template.getFileName());
              String savePath = doGenerator(sqlContext,template.getSavePath());
@@ -262,6 +270,14 @@ public class GeneratorService {
     	}
         VelocityContext context = new VelocityContext();
 
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        
+        ObjectStreamClass c = ObjectStreamClass.lookup(Serializable.class);
+        long serialID = c.getSerialVersionUID();
+        
+        context.put("serialVersionUID", serialID+"L");
+        context.put("project", sqlContext.getProject());
+        context.put("time", df.format(LocalDateTime.now()));
         context.put("context", sqlContext);
         context.put("table", sqlContext.getTableDefinition());
         context.put("pkColumn", sqlContext.getTableDefinition().getPkColumn());
@@ -270,4 +286,8 @@ public class GeneratorService {
         return VelocityUtil.generate(context, template);
     }
 
+    public static void main(String[] args) {
+    	ObjectStreamClass c = ObjectStreamClass.lookup(Serializable.class);
+        System.out.println(c.getSerialVersionUID());
+	}
 }

@@ -11,6 +11,7 @@ import org.durcframework.autocode.util.FieldUtil;
 public class SQLContext {
 	private TableDefinition tableDefinition; // 表结构定义
 	private String packageName; // 包名
+	private String project; // 项目名
 	
 	public SQLContext(TableDefinition tableDefinition){
 		this.tableDefinition = tableDefinition;
@@ -87,26 +88,12 @@ public class SQLContext {
 	}
 	
 	
-	public static void main(String[] args) {
-		
-		SQLContext[] tt = {
-			new SQLContext(new TableDefinition("r_table_b"))
-			,new SQLContext(new TableDefinition("MyTable"))
-			,new SQLContext(new TableDefinition("user.frontUser"))
-			,new SQLContext(new TableDefinition("user.back_user"))
-		};
-		
-		for (SQLContext ctx : tt) {
-			System.out.println(ctx.getJavaBeanName());
-		}
-		/*
-		输出:
-		RTableB
-		MyTable
-		UserFrontUser
-		UserBackUser
-		*/
+	public String getProject() {
+		return project;
 	}
-	
+
+	public void setProject(String project) {
+		this.project = project;
+	}
 	
 }

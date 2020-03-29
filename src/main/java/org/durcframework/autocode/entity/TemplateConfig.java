@@ -9,6 +9,7 @@ public class TemplateConfig {
     private String content;
     private String backUser;
     private String suffix;
+    private String project;
 
     public String getSuffix() {
         return suffix;
@@ -64,6 +65,14 @@ public class TemplateConfig {
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+
+	public String getProject() {
+		return project;
+	}
+
+	public void setProject(String project) {
+		this.project = project;
 	}
 
 }
