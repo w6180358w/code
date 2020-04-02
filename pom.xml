@@ -135,7 +135,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.oracle</groupId>
+			<groupId>ojdbc</groupId>
 			<artifactId>ojdbc</artifactId>
 			<version>7</version>
 		</dependency>
