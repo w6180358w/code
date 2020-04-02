@@ -8,7 +8,7 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
-import org.apache.ibatis.datasource.pooled.PooledDataSourceFactory;
+import org.apache.ibatis.datasource.unpooled.UnpooledDataSourceFactory;
 import org.apache.ibatis.jdbc.SqlRunner;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.Environment;
@@ -123,7 +123,7 @@ List<Map<String, Object>> map = SqlHelper.runSql(dataSourceConfig, sql,params);
 		properties.setProperty(USERNAME, dataBaseConfig.getUsername());
 		properties.setProperty(PASSWORD, dataBaseConfig.getPassword());
 		
-		PooledDataSourceFactory pooledDataSourceFactory = new PooledDataSourceFactory();
+		UnpooledDataSourceFactory pooledDataSourceFactory = new UnpooledDataSourceFactory();
 		pooledDataSourceFactory.setProperties(properties);
 
 		return pooledDataSourceFactory.getDataSource();
