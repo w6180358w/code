@@ -19,6 +19,7 @@ public class ClientParam {
 	private String tcId;
 	private String tableName;
 	private String packageName;
+	private String controllerPreFix;//控制器前缀
 	private String charset = "UTF-8";
 
 	private String dbName;
@@ -167,7 +168,13 @@ public class ClientParam {
 	public void setTcIdMyBatis(int tcIdMyBatis) {
 		this.tcIdMyBatis = tcIdMyBatis;
 	}
-	
-	
 
+	public String getControllerPreFix() {
+		return controllerPreFix;
+	}
+
+	public void setControllerPreFix(String controllerPreFix) {
+		this.controllerPreFix = controllerPreFix;
+	}
+	
 }

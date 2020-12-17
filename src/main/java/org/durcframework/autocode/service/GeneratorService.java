@@ -49,7 +49,7 @@ public class GeneratorService {
         List<CodeFile> codeFileList = new ArrayList<CodeFile>();
         
         for (SQLContext sqlContext : contextList) {
-            setPackageName(sqlContext, generatorParam.getPackageName());
+            setPackageName(sqlContext, generatorParam.getPackageName(), generatorParam.getControllerPreFix());
 
             String packageName = sqlContext.getJavaBeanNameLF();
 
@@ -96,7 +96,7 @@ public class GeneratorService {
         String projectFolder = this.buildProjectFolder(webRootPath);
         
         for (SQLContext sqlContext : contextList) {
-            setPackageName(sqlContext, generatorParam.getPackageName());
+            setPackageName(sqlContext, generatorParam.getPackageName(), generatorParam.getControllerPreFix());
             for (int tcId : generatorParam.getTcIds()) {
                 TemplateConfig template = templateConfigService.get(tcId);
                 sqlContext.setPackageName(generatorParam.getPackageName());
@@ -144,7 +144,7 @@ public class GeneratorService {
     	String classFolder = projectFolder + "/class";
     	String resourcesFolder = projectFolder + "/resources";
     	
-        setPackageName(sqlContext, clientParam.getPackageName());
+        setPackageName(sqlContext, clientParam.getPackageName(), clientParam.getControllerPreFix());
          
         for (int tcId : classTcIds) {
              TemplateConfig template = templateConfigService.get(tcId);
@@ -258,9 +258,12 @@ public class GeneratorService {
     			DOWNLOAD_FOLDER_NAME + File.separator + System.currentTimeMillis();
     }
 
-    private void setPackageName(SQLContext sqlContext, String packageName) {
+    private void setPackageName(SQLContext sqlContext, String packageName, String controllerPreFix) {
         if (StringUtils.hasText(packageName)) {
             sqlContext.setPackageName(packageName);
+        }
+        if (StringUtils.hasText(controllerPreFix)) {
+        	sqlContext.setControllerPreFix(controllerPreFix);
         }
     }
 

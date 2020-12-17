@@ -23,7 +23,8 @@ step1Panel = new FDFormPanel({
 step2Panel = new FDFormPanel({
 	domId:'step2Panel'
 	,controls:[
-		new FDTextBox({domId:'txt-packageName',name:'packageName',nativeAttr:{placeholder:'com.aa.bb'},width:'300px'}) 
+		new FDTextBox({domId:'txt-packageName',name:'packageName',nativeAttr:{placeholder:'com.aa.bb'},width:'300px'}) ,
+		new FDTextBox({domId:'txt-controllerPreFix',name:'controllerPreFix',nativeAttr:{placeholder:'/base/base'},width:'300px'}) 
 		,new FDTextBox({domId:'txt-charset',name:'charset',defaultValue:'UTF-8',nativeAttr:{placeholder:'输入文件编码,如:UTF-8'}}) 
 	]
 });

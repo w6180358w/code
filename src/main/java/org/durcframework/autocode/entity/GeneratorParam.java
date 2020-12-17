@@ -7,6 +7,7 @@ public class GeneratorParam {
 	private List<String> tableNames;
 	private List<Integer> tcIds;
 	private String packageName;
+	private String controllerPreFix;//控制器前缀
 	private String charset = "UTF-8";
 
 	public int getDcId() {
@@ -47,6 +48,14 @@ public class GeneratorParam {
 
 	public void setCharset(String charset) {
 		this.charset = charset;
+	}
+
+	public String getControllerPreFix() {
+		return controllerPreFix;
+	}
+
+	public void setControllerPreFix(String controllerPreFix) {
+		this.controllerPreFix = controllerPreFix;
 	}
 
 }

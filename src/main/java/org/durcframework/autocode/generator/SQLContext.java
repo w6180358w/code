@@ -12,6 +12,7 @@ public class SQLContext {
 	private TableDefinition tableDefinition; // 表结构定义
 	private String packageName; // 包名
 	private String project; // 项目名
+	private String controllerPreFix;//控制器前缀
 	
 	public SQLContext(TableDefinition tableDefinition){
 		this.tableDefinition = tableDefinition;
@@ -87,7 +88,14 @@ public class SQLContext {
 		this.packageName = packageName;
 	}
 	
-	
+	public String getControllerPreFix() {
+		return controllerPreFix;
+	}
+
+	public void setControllerPreFix(String controllerPreFix) {
+		this.controllerPreFix = controllerPreFix;
+	}
+
 	public String getProject() {
 		return project;
 	}
