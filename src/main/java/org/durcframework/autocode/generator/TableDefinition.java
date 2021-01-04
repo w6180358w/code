@@ -11,6 +11,7 @@ public class TableDefinition {
 	private String tableName; // 表名
 	private String comment; // 注释
 	private List<ColumnDefinition> columnDefinitions = Collections.emptyList(); // 字段定义
+	private List<ColumnDefinition> allColumnDefinitions = Collections.emptyList(); // 所有字段定义
 
 	public TableDefinition() {
 	}
@@ -68,6 +69,14 @@ public class TableDefinition {
 
 	public void setColumnDefinitions(List<ColumnDefinition> columnDefinitions) {
 		this.columnDefinitions = columnDefinitions;
+	}
+
+	public List<ColumnDefinition> getAllColumnDefinitions() {
+		return allColumnDefinitions;
+	}
+
+	public void setAllColumnDefinitions(List<ColumnDefinition> allColumnDefinitions) {
+		this.allColumnDefinitions = allColumnDefinitions;
 	}
 
 }

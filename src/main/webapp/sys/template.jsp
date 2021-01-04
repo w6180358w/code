@@ -56,7 +56,7 @@
                     <td colspan="3"><a href="#" class="link" onclick="VelocityHelper.show(); return false;">查看Velocity参数</a></td>
                 </tr>
                 <tr>
-	                <th width="100"><i class="require-red">*</i>项目名：</th>
+	                <th width="100">项目名：</th>
 	                <td id="txt-project"></td>
 	            </tr>
                 <tr>
@@ -67,7 +67,7 @@
                 </tr>
                 <tr>
                     <th><i class="require-red">*</i>内容：</th>
-                    <td id="txt-content" colspan="4"></td>
+                    <td id="txt-content" colspan="6"></td>
                 </tr>
          	</tbody>
          </table>
@@ -171,8 +171,8 @@ function getAddEditor() {
 
 crudWin = new FDWindow({
 	contentId:'crudWin'
-	,height:'460px'
-	,width:'960px'
+	,height:'560px'
+	,width:'1060px'
 	,modal:false
 	,buttons:[
 		{text:'保存',onclick:function(){
@@ -187,8 +187,8 @@ crudWin = new FDWindow({
 viewWin = new FDWindow({
 	contentId:'viewWin'
 	,title:'模板内容'
-	,height:'450px'
-	,width:'960px'
+	,height:'550px'
+	,width:'1060px'
 	,modal:false
 	,buttons:[
 		{text:'关闭',onclick:function(){
@@ -210,8 +210,7 @@ formPanel = new FDFormPanel({
 	    new FDHidden({name:'tcId',defaultValue:0})
 	    ,new FDTextBox({domId:'txt-project',name:'project',msgId:'formMsg'
 			,validates:[
-		     {rule:{notNull:true},successClass:'green',errorClass:'require-red',errorMsg:'项目名不能为空'}
-		     ,{rule:{maxLength:200},successClass:'green',errorClass:'require-red',errorMsg:'项目名长度不能大于200'}
+		     {rule:{maxLength:200},successClass:'green',errorClass:'require-red',errorMsg:'项目名长度不能大于200'}
 		     ]
 		})
 		,new FDTextBox({domId:'txt-name',name:'name',msgId:'formMsg'
@@ -227,7 +226,7 @@ formPanel = new FDFormPanel({
 	    })
 	    ,new FDTextBox({domId:'txt-savePath',name:'savePath',msgId:'formMsg',width:300
 	    })
-		,new FDTextArea({domId:'txt-content',name:'content',msgId:'formMsg',width:800,height:360
+		,new FDTextArea({domId:'txt-content',name:'content',msgId:'formMsg',width:1000,height:460
 			,validates:[
 		     {rule:{notNull:true},successClass:'green',errorClass:'require-red',errorMsg:'模板内容不能为空'}
 		     ]

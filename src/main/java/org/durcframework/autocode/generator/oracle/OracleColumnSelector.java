@@ -54,7 +54,7 @@ public class OracleColumnSelector extends ColumnSelector {
 	}
 	
 	@Override
-	public List<ColumnDefinition> afterColumnDefinitions(String tableName,List<ColumnDefinition> columnDefinitionList) {
+	public void afterColumnDefinitions(String tableName,List<ColumnDefinition> columnDefinitionList) {
 		//主键列
 		List<Map<String, Object>> pkList = SqlHelper.runSql(this.getDataBaseConfig(), String.format(pkSql, tableName));
 		Map<String,String> pkMap = new HashMap<String, String>(5);
@@ -67,8 +67,6 @@ public class OracleColumnSelector extends ColumnSelector {
 				col.setIsPk(true);
 			}
 		}
-
-		return columnDefinitionList;
 	}
 	
 	/*

@@ -9,6 +9,7 @@ public class GeneratorParam {
 	private String packageName;
 	private String controllerPreFix;//控制器前缀
 	private String charset = "UTF-8";
+	private String author = "代码生成系统";
 
 	public int getDcId() {
 		return dcId;
@@ -56,6 +57,14 @@ public class GeneratorParam {
 
 	public void setControllerPreFix(String controllerPreFix) {
 		this.controllerPreFix = controllerPreFix;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
 }

@@ -16,6 +16,10 @@ public class FieldUtil {
 			StringBuilder sb = new StringBuilder(field);
 			while (sb.indexOf("_") > -1) {
 				int index = sb.indexOf("_");
+				if(index+1==sb.length()) {
+					sb.deleteCharAt(index);
+					break;
+				}
 				String upperLetter = sb.substring(index + 1, index + 2)
 						.toUpperCase();
 				sb.replace(index + 1, index + 2, upperLetter);

@@ -44,6 +44,7 @@
 						    	<tr>
 						    		<td>package: </td><td id="txt-packageName"></td>
 						    		<td>控制器前缀: </td><td id="txt-controllerPreFix"></td>
+						    		<td>作者: </td><td id="txt-author"></td>
 						    		<td>文件编码: </td><td id="txt-charset"></td>	
 						    	</tr>
 						    </table>

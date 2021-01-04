@@ -18,7 +18,7 @@
 		FROM `template_config` t
 		<include refid="expressionBlock.where" />
 		<if test="sortname == null">
-			ORDER BY `name`
+			ORDER BY `name` DESC
 		</if>
 		<if test="sortname != null">
 			ORDER BY ${order}

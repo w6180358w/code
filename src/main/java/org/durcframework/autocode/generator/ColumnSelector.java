@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.durcframework.autocode.util.SqlHelper;
 
 /**
@@ -31,24 +32,37 @@ public abstract class ColumnSelector {
 	 */
 	protected abstract ColumnDefinition buildColumnDefinition(Map<String, Object> rowMap);
 	
-	public List<ColumnDefinition> getColumnDefinitions(String tableName) {
-		List<Map<String, Object>> resultList = SqlHelper.runSql(this.getDataBaseConfig(), getColumnInfoSQL(tableName));
+	public void setColumnDefinitions(TableDefinition tableDefinition) {
+		List<Map<String, Object>> resultList = SqlHelper.runSql(this.getDataBaseConfig(), getColumnInfoSQL(tableDefinition.getTableName()));
 		
 		List<ColumnDefinition> columnDefinitionList = new ArrayList<ColumnDefinition>(resultList.size());
+		List<ColumnDefinition> allColumnDefinitionList = new ArrayList<ColumnDefinition>(resultList.size());
+		String ignore = this.getDataBaseConfig().getIgnore();
+		List<String> ignores = new ArrayList<>();
+		if(StringUtils.isNotEmpty(ignore)) {
+			for (String ig : ignore.split(",")) {
+				ignores.add(ig.trim().toUpperCase());
+			}
+		}
 		// 构建columnDefinition
 		for (Map<String, Object> rowMap : resultList) {
 			ColumnDefinition col = buildColumnDefinition(rowMap);
-			String ignore = this.getDataBaseConfig().getIgnore();
-			if(ignore!=null && ignore.indexOf(col.getColumnName())<0){
+			allColumnDefinitionList.add(col);
+			if(StringUtils.isNotEmpty(ignore)) {
+				if(!ignores.contains(col.getColumnNameUp().trim().toUpperCase())) {
+					columnDefinitionList.add(col);
+				}
+			}else {
 				columnDefinitionList.add(col);
 			}
 		}
-					
-		return afterColumnDefinitions(tableName, columnDefinitionList);
+		tableDefinition.setAllColumnDefinitions(allColumnDefinitionList);
+		tableDefinition.setColumnDefinitions(columnDefinitionList);
+		afterColumnDefinitions(tableDefinition.getTableName(), columnDefinitionList);
 	}
 
-	protected List<ColumnDefinition> afterColumnDefinitions(String tableName,List<ColumnDefinition> columnDefinitionList){
-		return columnDefinitionList;
+	protected void afterColumnDefinitions(String tableName,List<ColumnDefinition> columnDefinitionList){
+		
 	}
 	
 	public DataBaseConfig getDataBaseConfig() {

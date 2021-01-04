@@ -16,10 +16,13 @@ var VelocityHelper = (function(){
 				{text:'${serialVersionUID} : Java类的序列化ID'},
 				{text:'${project} : 项目名'},
 				{text:'${time} : 当前系统时间,格式[yyyy-MM-dd HH:mm:ss]'},
+				{text:'${author} : 作者'},
 				{text:'${pkColumn} : 主键对象,即${columns}中的一个元素'},
+				{text:'${allColumn} : 所有列对象,用法和${columns}一致'},
 				{
 			     	text:'${context}'
 			     	,children:[
+			     		{text:'${context.controllerPreFix} : 控制器接口前缀'},
 			     		{text:'${context.packageName} : 包名'}
 			     		,{text:'${context.javaBeanName} : Java类名'}
 			     		,{text:'${context.javaBeanNameLF} : Java类名且首字母小写'}
@@ -38,7 +41,7 @@ var VelocityHelper = (function(){
 			     		,{text:'${table.comment} : 表注释'}
 			     	]
 			     }
-			     ,{text:'#foreach($column in $columns)...#end'
+			     ,{text:'#foreach($column in $columns)...#end 忽略公共字段后的列'
 			     	,children:[
 			     		{text:'${column.columnName} : 表中字段名'}
 			     		,{text:'${column.columnNameUp} : 表中字段名大写'}

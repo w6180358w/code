@@ -20,6 +20,7 @@ public class ClientParam {
 	private String tableName;
 	private String packageName;
 	private String controllerPreFix;//控制器前缀
+	private String author = "代码生成系统";
 	private String charset = "UTF-8";
 
 	private String dbName;
@@ -175,6 +176,14 @@ public class ClientParam {
 
 	public void setControllerPreFix(String controllerPreFix) {
 		this.controllerPreFix = controllerPreFix;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 	
 }

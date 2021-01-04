@@ -32,7 +32,7 @@ public abstract class TableSelector {
 		
 		for (Map<String, Object> rowMap : resultList) {
 			TableDefinition tableDefinition = this.buildTableDefinition(rowMap);
-			tableDefinition.setColumnDefinitions(columnSelector.getColumnDefinitions(tableDefinition.getTableName()));
+			columnSelector.setColumnDefinitions(tableDefinition);
 			tablesList.add(tableDefinition);
 		}
 		

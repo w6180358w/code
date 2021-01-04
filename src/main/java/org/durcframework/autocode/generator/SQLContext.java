@@ -13,6 +13,7 @@ public class SQLContext {
 	private String packageName; // 包名
 	private String project; // 项目名
 	private String controllerPreFix;//控制器前缀
+	private String author;
 	
 	public SQLContext(TableDefinition tableDefinition){
 		this.tableDefinition = tableDefinition;
@@ -102,6 +103,14 @@ public class SQLContext {
 
 	public void setProject(String project) {
 		this.project = project;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 	
 }

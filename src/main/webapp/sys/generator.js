@@ -24,8 +24,11 @@ step2Panel = new FDFormPanel({
 	domId:'step2Panel'
 	,controls:[
 		new FDTextBox({domId:'txt-packageName',name:'packageName',nativeAttr:{placeholder:'com.aa.bb'},width:'300px'}) ,
-		new FDTextBox({domId:'txt-controllerPreFix',name:'controllerPreFix',nativeAttr:{placeholder:'/base/base'},width:'300px'}) 
-		,new FDTextBox({domId:'txt-charset',name:'charset',defaultValue:'UTF-8',nativeAttr:{placeholder:'输入文件编码,如:UTF-8'}}) 
+		new FDTextBox({domId:'txt-controllerPreFix',name:'controllerPreFix',nativeAttr:{placeholder:'/base/base'},width:'300px'}), 
+		new FDTextBox({domId:'txt-author',name:'author',nativeAttr:{placeholder:'代码生成系统'},width:'300px',validates:[
+	    		{rule:{notNull:true},successClass:'green',errorClass:'require-red',errorMsg:'文件名不能为空'}
+	    	]}),
+		new FDTextBox({domId:'txt-charset',name:'charset',defaultValue:'UTF-8',nativeAttr:{placeholder:'输入文件编码,如:UTF-8'}}) 
 	]
 });
 

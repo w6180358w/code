@@ -7,6 +7,7 @@ import org.durcframework.autocode.entity.TemplateConfigSch;
 import org.durcframework.autocode.service.TemplateConfigService;
 import org.durcframework.core.controller.CrudController;
 import org.durcframework.core.expression.ExpressionQuery;
+import org.durcframework.core.expression.SqlContent;
 import org.durcframework.core.expression.subexpression.ValueExpression;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,7 @@ public class TemplateConfigController extends
 	Object listTemplate(TemplateConfigSch searchEntity) {
 		BackUser user = AutoCodeContext.getInstance().getUser();
 		searchEntity.setSortname("`name`");
+		searchEntity.setSortorder(SqlContent.DESC);
 		ExpressionQuery query = this.buildExpressionQuery(searchEntity);
 		query.add(new ValueExpression("back_user", user.getUsername()));
 		return this.query(query);
@@ -51,6 +53,7 @@ public class TemplateConfigController extends
 	public @ResponseBody
 	Object listUserTepmlate(TemplateConfigSch searchEntity) {
 		searchEntity.setSortname("`name`");
+		searchEntity.setSortorder(SqlContent.DESC);
 		BackUser user = AutoCodeContext.getInstance().getUser();
 		ExpressionQuery query = this.buildExpressionQuery(searchEntity);
 		query.add(new ValueExpression("back_user", user.getUsername()));

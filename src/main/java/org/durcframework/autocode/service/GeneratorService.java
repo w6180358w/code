@@ -23,7 +23,6 @@ import org.durcframework.autocode.generator.TableDefinition;
 import org.durcframework.autocode.generator.TableSelector;
 import org.durcframework.autocode.util.FileUtil;
 import org.durcframework.autocode.util.VelocityUtil;
-import org.durcframework.autocode.util.XmlFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -49,7 +48,7 @@ public class GeneratorService {
         List<CodeFile> codeFileList = new ArrayList<CodeFile>();
         
         for (SQLContext sqlContext : contextList) {
-            setPackageName(sqlContext, generatorParam.getPackageName(), generatorParam.getControllerPreFix());
+            setPackageName(sqlContext, generatorParam);
 
             String packageName = sqlContext.getJavaBeanNameLF();
 
@@ -78,9 +77,9 @@ public class GeneratorService {
     }
     
     private String doFormat(String fileName,String content) {
-    	if(fileName.endsWith(".xml")) {
-			return XmlFormat.format(content);
-    	}
+//    	if(fileName.endsWith(".xml")) {
+//			return XmlFormat.format(content);
+//    	}
     	return content;
     }
     
@@ -96,7 +95,7 @@ public class GeneratorService {
         String projectFolder = this.buildProjectFolder(webRootPath);
         
         for (SQLContext sqlContext : contextList) {
-            setPackageName(sqlContext, generatorParam.getPackageName(), generatorParam.getControllerPreFix());
+            setPackageName(sqlContext, generatorParam);
             for (int tcId : generatorParam.getTcIds()) {
                 TemplateConfig template = templateConfigService.get(tcId);
                 sqlContext.setPackageName(generatorParam.getPackageName());
@@ -144,7 +143,7 @@ public class GeneratorService {
     	String classFolder = projectFolder + "/class";
     	String resourcesFolder = projectFolder + "/resources";
     	
-        setPackageName(sqlContext, clientParam.getPackageName(), clientParam.getControllerPreFix());
+        setPackageName(sqlContext, clientParam);
          
         for (int tcId : classTcIds) {
              TemplateConfig template = templateConfigService.get(tcId);
@@ -258,13 +257,24 @@ public class GeneratorService {
     			DOWNLOAD_FOLDER_NAME + File.separator + System.currentTimeMillis();
     }
 
-    private void setPackageName(SQLContext sqlContext, String packageName, String controllerPreFix) {
-        if (StringUtils.hasText(packageName)) {
-            sqlContext.setPackageName(packageName);
+    private void setPackageName(SQLContext sqlContext, GeneratorParam generatorParam) {
+        if (StringUtils.hasText(generatorParam.getPackageName())) {
+            sqlContext.setPackageName(generatorParam.getPackageName());
         }
-        if (StringUtils.hasText(controllerPreFix)) {
-        	sqlContext.setControllerPreFix(controllerPreFix);
+        if (StringUtils.hasText(generatorParam.getControllerPreFix())) {
+        	sqlContext.setControllerPreFix(generatorParam.getControllerPreFix());
         }
+        sqlContext.setAuthor(generatorParam.getAuthor());
+    }
+    
+    private void setPackageName(SQLContext sqlContext, ClientParam generatorParam) {
+    	if (StringUtils.hasText(generatorParam.getPackageName())) {
+    		sqlContext.setPackageName(generatorParam.getPackageName());
+    	}
+    	if (StringUtils.hasText(generatorParam.getControllerPreFix())) {
+    		sqlContext.setControllerPreFix(generatorParam.getControllerPreFix());
+    	}
+    	sqlContext.setAuthor(generatorParam.getAuthor());
     }
 
     private String doGenerator(SQLContext sqlContext, String template) {
@@ -281,9 +291,11 @@ public class GeneratorService {
         context.put("serialVersionUID", serialID+"L");
         context.put("project", sqlContext.getProject());
         context.put("time", df.format(LocalDateTime.now()));
+        context.put("author", sqlContext.getAuthor());
         context.put("context", sqlContext);
         context.put("table", sqlContext.getTableDefinition());
         context.put("pkColumn", sqlContext.getTableDefinition().getPkColumn());
+        context.put("allColumn", sqlContext.getTableDefinition().getAllColumnDefinitions());
         context.put("columns", sqlContext.getTableDefinition().getColumnDefinitions());
 
         return VelocityUtil.generate(context, template);

@@ -117,7 +117,7 @@ public class SqlTypeUtil {
 		mybatisTypeMap.put("varchar", "VARCHAR");
 		
 		//oracle
-		mybatisTypeMap.put("varchar2", "VARCHAR2");
+		mybatisTypeMap.put("varchar2", "VARCHAR");
 		mybatisTypeMap.put("number", "NUMBER");
 		mybatisTypeMap.put("raw", "BLOB");
 		mybatisTypeMap.put("longraw", "BLOB");
